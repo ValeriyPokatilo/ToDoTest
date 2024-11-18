@@ -11,7 +11,7 @@ protocol ListPresenterProtocol: AnyObject {
     var view: ListViewProtocol? { get set }
     var interactor: ListInteractorProtocol? { get set }
     func getTasks()
-    func didGetTasks(tasks: [ToDoItem])
+    func didGetTasks(tasks: [Task])
 }
 
 final class ListPresenter: ListPresenterProtocol {
@@ -23,7 +23,7 @@ final class ListPresenter: ListPresenterProtocol {
         interactor?.getTasks()
     }
     
-    func didGetTasks(tasks: [ToDoItem]) {
+    func didGetTasks(tasks: [Task]) {
         view?.showTasks(tasks: tasks)
     }
 }

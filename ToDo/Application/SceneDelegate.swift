@@ -18,4 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = ListRouter.createListModule()
         window?.makeKeyAndVisible()
     }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        CoreDataManager.shared.saveContext()
+    }
 }

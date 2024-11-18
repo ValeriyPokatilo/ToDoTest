@@ -55,16 +55,18 @@ final class ToDoListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: ToDoItem) {
+    func configure(with model: Task) {
         descriptionLabel.text = model.description
-        dateLabel.text = model.date
+        if let date = model.date {
+            dateLabel.text = date.toString()
+        }
         
         if model.completed {
             icon.image = UIImage(systemName: "checkmark.circle")
             icon.tintColor = .yellow
             titleLabel.layer.opacity = 0.5
             let attributedText = NSAttributedString(
-                string: model.title,
+                string: model.title ?? "",
                 attributes: [
                     .strikethroughStyle: NSUnderlineStyle.single.rawValue
                 ]

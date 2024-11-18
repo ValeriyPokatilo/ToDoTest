@@ -9,7 +9,7 @@ import UIKit
 
 protocol ListViewProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
-    func showTasks(tasks: [ToDoItem])
+    func showTasks(tasks: [Task])
 }
 
 final class ListViewController: UIViewController, ListViewProtocol {
@@ -22,14 +22,14 @@ final class ListViewController: UIViewController, ListViewProtocol {
     
     private let cellId = "cell"
     
-    private var taskList = [ToDoItem]()
+    private var taskList = [Task]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
         configureAppearance()
         configureLayout()
-        
+                
         presenter?.getTasks()
     }
     
@@ -83,7 +83,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
         ])
     }
 
-    func showTasks(tasks: [ToDoItem]) {
+    func showTasks(tasks: [Task]) {
         taskList = tasks
         footerView.configure(with: tasks.count)
         tableView.reloadData()
