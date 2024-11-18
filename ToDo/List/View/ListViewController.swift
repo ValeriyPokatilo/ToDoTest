@@ -9,6 +9,7 @@ import UIKit
 
 final class ListViewController: UIViewController {
     
+    private let searchBar = UISearchBar()
     private let tableView = UITableView()
     private let cellId = "cell"
 
@@ -20,20 +21,39 @@ final class ListViewController: UIViewController {
     }
     
     private func addViews() {
+        view.addSubview(searchBar)
         view.addSubview(tableView)
     }
     
     private func configureAppearance() {
+        title = .tasks
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.prefersLargeTitles = true
+    
         tableView.backgroundColor = .black
         tableView.dataSource = self
         tableView.separatorColor = .gray
         tableView.register(ToDoListCell.self, forCellReuseIdentifier: cellId)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.barTintColor = .black
+        searchBar.placeholder = .search
     }
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
