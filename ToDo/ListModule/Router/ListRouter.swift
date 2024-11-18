@@ -9,6 +9,7 @@ import UIKit
 
 protocol ListRouterProtocol {
     static func createListModule() -> UINavigationController
+    func showDetails(view: ListViewProtocol, task: Task)
 }
 
 final class ListRouter: ListRouterProtocol {
@@ -16,10 +17,12 @@ final class ListRouter: ListRouterProtocol {
         let controller: ListViewProtocol = ListViewController()
         let presenter: ListPresenterProtocol = ListPresenter()
         let interactor: ListInteractorProtocol = ListInteractor()
+        let router: ListRouterProtocol = ListRouter()
         
         controller.presenter = presenter
         presenter.view = controller
         presenter.interactor = interactor
+        presenter.router = router
         interactor.presenter = presenter
         
         guard let viewController = controller as? UIViewController else {
@@ -28,5 +31,15 @@ final class ListRouter: ListRouterProtocol {
         
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
+    }
+    
+    func showDetails(view: ListViewProtocol, task: Task) {
+        let controller = DetailsRouter.createDetailsModule(with: task)
+        
+        guard let list = view as? UIViewController else {
+            fatalError("Invalid View Protocol type")
+        }
+        
+        list.navigationController?.pushViewController(controller, animated: true)
     }
 }

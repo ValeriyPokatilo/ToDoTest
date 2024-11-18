@@ -56,6 +56,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
     
         tableView.backgroundColor = .black
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.separatorColor = .gray
         tableView.register(ToDoListCell.self, forCellReuseIdentifier: cellId)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +95,13 @@ final class ListViewController: UIViewController, ListViewProtocol {
         let alert = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension ListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let task = taskList[indexPath.row]
+        presenter?.showDetails(task: task)
     }
 }
 

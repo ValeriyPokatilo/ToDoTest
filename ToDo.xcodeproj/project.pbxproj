@@ -22,6 +22,10 @@
 		7615721F2CEB997100375EFC /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7615721D2CEB997100375EFC /* ToDo.xcdatamodeld */; };
 		761572212CEB9A7000375EFC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572202CEB9A7000375EFC /* CoreDataManager.swift */; };
 		761572232CEB9F1300375EFC /* Ext+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572222CEB9F1300375EFC /* Ext+Date.swift */; };
+		761572AD2CEBB29E00375EFC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572AC2CEBB29E00375EFC /* DetailsViewController.swift */; };
+		761572AF2CEBB60E00375EFC /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572AE2CEBB60E00375EFC /* DetailsInteractor.swift */; };
+		761572B12CEBB66700375EFC /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B02CEBB66700375EFC /* DetailsPresenter.swift */; };
+		761572B32CEBB77B00375EFC /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B22CEBB77B00375EFC /* DetailsRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		7615721E2CEB997100375EFC /* ToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDo.xcdatamodel; sourceTree = "<group>"; };
 		761572202CEB9A7000375EFC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		761572222CEB9F1300375EFC /* Ext+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Date.swift"; sourceTree = "<group>"; };
+		761572AC2CEBB29E00375EFC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		761572AE2CEBB60E00375EFC /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
+		761572B02CEBB66700375EFC /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
+		761572B22CEBB77B00375EFC /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +84,8 @@
 			children = (
 				761571F32CEB501300375EFC /* Application */,
 				761571F82CEB5C9B00375EFC /* Emtities */,
-				761571F42CEB504600375EFC /* List */,
+				761571F42CEB504600375EFC /* ListModule */,
+				761572A72CEBB24400375EFC /* DetailsModule */,
 				761572192CEB98E700375EFC /* CoreData */,
 				761572242CEB9FAE00375EFC /* Extensions */,
 				7615720A2CEB655700375EFC /* Resources */,
@@ -96,7 +105,7 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		761571F42CEB504600375EFC /* List */ = {
+		761571F42CEB504600375EFC /* ListModule */ = {
 			isa = PBXGroup;
 			children = (
 				761571F52CEB527200375EFC /* View */,
@@ -104,7 +113,7 @@
 				761572102CEB6E5500375EFC /* Presenter */,
 				761571FB2CEB630100375EFC /* Router */,
 			);
-			path = List;
+			path = ListModule;
 			sourceTree = "<group>";
 		};
 		761571F52CEB527200375EFC /* View */ = {
@@ -172,6 +181,49 @@
 				761572222CEB9F1300375EFC /* Ext+Date.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		761572A72CEBB24400375EFC /* DetailsModule */ = {
+			isa = PBXGroup;
+			children = (
+				761572A82CEBB26200375EFC /* View */,
+				761572A92CEBB26900375EFC /* Interactor */,
+				761572AB2CEBB27A00375EFC /* Presenter */,
+				761572AA2CEBB27300375EFC /* Router */,
+			);
+			path = DetailsModule;
+			sourceTree = "<group>";
+		};
+		761572A82CEBB26200375EFC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				761572AC2CEBB29E00375EFC /* DetailsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		761572A92CEBB26900375EFC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				761572AE2CEBB60E00375EFC /* DetailsInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		761572AA2CEBB27300375EFC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				761572B22CEBB77B00375EFC /* DetailsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		761572AB2CEBB27A00375EFC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				761572B02CEBB66700375EFC /* DetailsPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,9 +309,13 @@
 				761572212CEB9A7000375EFC /* CoreDataManager.swift in Sources */,
 				7615721F2CEB997100375EFC /* ToDo.xcdatamodeld in Sources */,
 				761571EE2CEB4EE600375EFC /* SceneDelegate.swift in Sources */,
+				761572AF2CEBB60E00375EFC /* DetailsInteractor.swift in Sources */,
 				761571EF2CEB4EE600375EFC /* ListViewController.swift in Sources */,
+				761572B32CEBB77B00375EFC /* DetailsRouter.swift in Sources */,
+				761572AD2CEBB29E00375EFC /* DetailsViewController.swift in Sources */,
 				761571F72CEB528900375EFC /* ToDoListCell.swift in Sources */,
 				7615720C2CEB657300375EFC /* Strings.swift in Sources */,
+				761572B12CEBB66700375EFC /* DetailsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
