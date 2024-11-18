@@ -50,11 +50,11 @@ final class CoreDataManager {
         }
     }
     
-    func createElement(title: String, description: String) {
+    func createElement(title: String, description: String, completed: Bool = false) {
         let element = Task(context: context)
         element.title = title
         element.desc = description
-        element.completed = false
+        element.completed = completed
         element.date = Date()
         
         saveContext()

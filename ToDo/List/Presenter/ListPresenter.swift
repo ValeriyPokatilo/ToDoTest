@@ -12,6 +12,8 @@ protocol ListPresenterProtocol: AnyObject {
     var interactor: ListInteractorProtocol? { get set }
     func getTasks()
     func didGetTasks(tasks: [Task])
+    func didLoadTasks()
+    func showAlert(error: Error)
 }
 
 final class ListPresenter: ListPresenterProtocol {
@@ -25,5 +27,13 @@ final class ListPresenter: ListPresenterProtocol {
     
     func didGetTasks(tasks: [Task]) {
         view?.showTasks(tasks: tasks)
+    }
+    
+    func didLoadTasks() {
+        
+    }
+    
+    func showAlert(error: Error) {
+        view?.showAlert(error: error)
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 protocol ListViewProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
     func showTasks(tasks: [Task])
+    func showAlert(error: Error)
 }
 
 final class ListViewController: UIViewController, ListViewProtocol {
@@ -87,6 +88,12 @@ final class ListViewController: UIViewController, ListViewProtocol {
         taskList = tasks
         footerView.configure(with: tasks.count)
         tableView.reloadData()
+    }
+    
+    func showAlert(error: Error) {
+        let alert = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 

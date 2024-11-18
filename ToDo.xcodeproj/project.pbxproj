@@ -13,7 +13,7 @@
 		761571F02CEB4EE600375EFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 761571E62CEB4EE600375EFC /* Assets.xcassets */; };
 		761571F22CEB4EE600375EFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 761571E92CEB4EE600375EFC /* LaunchScreen.storyboard */; };
 		761571F72CEB528900375EFC /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571F62CEB528900375EFC /* ToDoListCell.swift */; };
-		761571FA2CEB5CA300375EFC /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571F92CEB5CA300375EFC /* ToDoItem.swift */; };
+		761571FA2CEB5CA300375EFC /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571F92CEB5CA300375EFC /* Dummy.swift */; };
 		761571FD2CEB631400375EFC /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571FC2CEB631400375EFC /* ListRouter.swift */; };
 		7615720C2CEB657300375EFC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615720B2CEB657300375EFC /* Strings.swift */; };
 		761572122CEB6EE300375EFC /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572112CEB6EE300375EFC /* ListInteractor.swift */; };
@@ -33,7 +33,7 @@
 		761571EA2CEB4EE600375EFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		761571EB2CEB4EE600375EFC /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		761571F62CEB528900375EFC /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
-		761571F92CEB5CA300375EFC /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		761571F92CEB5CA300375EFC /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		761571FC2CEB631400375EFC /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
 		7615720B2CEB657300375EFC /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		761572112CEB6EE300375EFC /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		761571F82CEB5C9B00375EFC /* Emtities */ = {
 			isa = PBXGroup;
 			children = (
-				761571F92CEB5CA300375EFC /* ToDoItem.swift */,
+				761571F92CEB5CA300375EFC /* Dummy.swift */,
 			);
 			path = Emtities;
 			sourceTree = "<group>";
@@ -249,7 +249,7 @@
 			files = (
 				761572142CEB6F0400375EFC /* ListPresenter.swift in Sources */,
 				761571FD2CEB631400375EFC /* ListRouter.swift in Sources */,
-				761571FA2CEB5CA300375EFC /* ToDoItem.swift in Sources */,
+				761571FA2CEB5CA300375EFC /* Dummy.swift in Sources */,
 				761572122CEB6EE300375EFC /* ListInteractor.swift in Sources */,
 				761571ED2CEB4EE600375EFC /* AppDelegate.swift in Sources */,
 				761572182CEB8DEA00375EFC /* FooterView.swift in Sources */,
