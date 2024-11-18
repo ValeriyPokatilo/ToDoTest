@@ -9,7 +9,7 @@ import UIKit
 
 protocol ListRouterProtocol {
     static func createListModule() -> UINavigationController
-    func showDetails(view: ListViewProtocol, task: Task)
+    func showDetails(view: ListViewProtocol, task: Task?)
 }
 
 final class ListRouter: ListRouterProtocol {
@@ -33,7 +33,7 @@ final class ListRouter: ListRouterProtocol {
         return navigationController
     }
     
-    func showDetails(view: ListViewProtocol, task: Task) {
+    func showDetails(view: ListViewProtocol, task: Task?) {
         let controller = DetailsRouter.createDetailsModule(with: task)
         
         guard let list = view as? UIViewController else {

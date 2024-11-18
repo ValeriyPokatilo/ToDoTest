@@ -15,7 +15,7 @@ protocol ListPresenterProtocol: AnyObject {
     func didGetTasks(tasks: [Task])
     func didLoadTasks()
     func showAlert(error: Error)
-    func showDetails(task: Task)
+    func showDetails(task: Task?)
     func deleteTask(task: Task, completion: @escaping EmptyBlock)
     func shareTask(task: Task)
 }
@@ -42,7 +42,7 @@ final class ListPresenter: ListPresenterProtocol {
         view?.showAlert(error: error)
     }
     
-    func showDetails(task: Task) {
+    func showDetails(task: Task?) {
         guard let view else {
             return
         }

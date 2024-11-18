@@ -9,6 +9,8 @@ import UIKit
 
 final class FooterView: UIView {
     
+    var onCreateTap: EmptyBlock?
+    
     private let countLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
@@ -50,6 +52,9 @@ final class FooterView: UIView {
     private func configureAppearance() {
         countLabel.text = "0 \(String.taskCount)"
         backgroundColor = .darkGray
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        iconView.addGestureRecognizer(tapGesture)
+        iconView.isUserInteractionEnabled = true
     }
     
     private func configureLayout() {
@@ -63,5 +68,9 @@ final class FooterView: UIView {
             iconView.heightAnchor.constraint(equalToConstant: 28),
             iconView.widthAnchor.constraint(equalToConstant: 68)
         ])
+    }
+    
+    @objc private func handleTap() {
+        onCreateTap?()
     }
 }

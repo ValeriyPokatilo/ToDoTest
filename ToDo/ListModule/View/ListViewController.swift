@@ -67,6 +67,9 @@ final class ListViewController: UIViewController, ListViewProtocol {
         searchBar.placeholder = .search
         
         footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.onCreateTap = { [weak self] in
+            self?.presenter?.showDetails(task: nil)
+        }
     }
     
     private func configureLayout() {

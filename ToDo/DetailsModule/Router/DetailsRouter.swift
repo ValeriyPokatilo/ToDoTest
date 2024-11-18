@@ -8,11 +8,11 @@
 import UIKit
 
 protocol DetailsRouterProtocol: AnyObject {
-    static func createDetailsModule(with task: Task) -> UIViewController
+    static func createDetailsModule(with task: Task?) -> UIViewController
 }
 
 final class DetailsRouter: DetailsRouterProtocol {
-    static func createDetailsModule(with task: Task) -> UIViewController {
+    static func createDetailsModule(with task: Task?) -> UIViewController {
         let controller: DetailsViewProtocol = DetailsViewController()
         let presenter: DetailsPresenterProtocol = DetailsPresenter()
         let interactor: DetailsInteractorProtocol = DetailsInteractor()
