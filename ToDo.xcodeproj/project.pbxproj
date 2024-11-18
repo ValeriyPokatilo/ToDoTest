@@ -14,6 +14,8 @@
 		761571F22CEB4EE600375EFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 761571E92CEB4EE600375EFC /* LaunchScreen.storyboard */; };
 		761571F72CEB528900375EFC /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571F62CEB528900375EFC /* ToDoListCell.swift */; };
 		761571FA2CEB5CA300375EFC /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571F92CEB5CA300375EFC /* ToDoItem.swift */; };
+		761571FD2CEB631400375EFC /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761571FC2CEB631400375EFC /* ListRouter.swift */; };
+		7615720C2CEB657300375EFC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615720B2CEB657300375EFC /* Strings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		761571EB2CEB4EE600375EFC /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		761571F62CEB528900375EFC /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
 		761571F92CEB5CA300375EFC /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		761571FC2CEB631400375EFC /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
+		7615720B2CEB657300375EFC /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +62,10 @@
 		761571EC2CEB4EE600375EFC /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
-				761571F82CEB5C9B00375EFC /* Emtities */,
 				761571F32CEB501300375EFC /* Application */,
+				761571F82CEB5C9B00375EFC /* Emtities */,
 				761571F42CEB504600375EFC /* List */,
+				7615720A2CEB655700375EFC /* Resources */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -80,6 +85,7 @@
 		761571F42CEB504600375EFC /* List */ = {
 			isa = PBXGroup;
 			children = (
+				761571FB2CEB630100375EFC /* Router */,
 				761571F52CEB527200375EFC /* View */,
 			);
 			path = List;
@@ -100,6 +106,22 @@
 				761571F92CEB5CA300375EFC /* ToDoItem.swift */,
 			);
 			path = Emtities;
+			sourceTree = "<group>";
+		};
+		761571FB2CEB630100375EFC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				761571FC2CEB631400375EFC /* ListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7615720A2CEB655700375EFC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7615720B2CEB657300375EFC /* Strings.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,11 +197,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761571FD2CEB631400375EFC /* ListRouter.swift in Sources */,
 				761571FA2CEB5CA300375EFC /* ToDoItem.swift in Sources */,
 				761571ED2CEB4EE600375EFC /* AppDelegate.swift in Sources */,
 				761571EE2CEB4EE600375EFC /* SceneDelegate.swift in Sources */,
 				761571EF2CEB4EE600375EFC /* ListViewController.swift in Sources */,
 				761571F72CEB528900375EFC /* ToDoListCell.swift in Sources */,
+				7615720C2CEB657300375EFC /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
