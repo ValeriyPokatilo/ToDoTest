@@ -19,6 +19,7 @@
 		7615720E2CEB6BE300375EFC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615720D2CEB6BE300375EFC /* DataManager.swift */; };
 		761572122CEB6EE300375EFC /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572112CEB6EE300375EFC /* ListInteractor.swift */; };
 		761572142CEB6F0400375EFC /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572132CEB6F0400375EFC /* ListPresenter.swift */; };
+		761572182CEB8DEA00375EFC /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572172CEB8DEA00375EFC /* FooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		7615720D2CEB6BE300375EFC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		761572112CEB6EE300375EFC /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
 		761572132CEB6F0400375EFC /* ListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
+		761572172CEB8DEA00375EFC /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			children = (
 				761571EB2CEB4EE600375EFC /* ListViewController.swift */,
 				761571F62CEB528900375EFC /* ToDoListCell.swift */,
+				761572172CEB8DEA00375EFC /* FooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				761571FA2CEB5CA300375EFC /* ToDoItem.swift in Sources */,
 				761572122CEB6EE300375EFC /* ListInteractor.swift in Sources */,
 				761571ED2CEB4EE600375EFC /* AppDelegate.swift in Sources */,
+				761572182CEB8DEA00375EFC /* FooterView.swift in Sources */,
 				761571EE2CEB4EE600375EFC /* SceneDelegate.swift in Sources */,
 				761571EF2CEB4EE600375EFC /* ListViewController.swift in Sources */,
 				761571F72CEB528900375EFC /* ToDoListCell.swift in Sources */,

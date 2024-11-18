@@ -18,6 +18,8 @@ final class ListViewController: UIViewController, ListViewProtocol {
     
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
+    private var footerView = FooterView()
+    
     private let cellId = "cell"
     
     private var taskList = [ToDoItem]()
@@ -34,10 +36,13 @@ final class ListViewController: UIViewController, ListViewProtocol {
     private func addViews() {
         view.addSubview(searchBar)
         view.addSubview(tableView)
+        view.addSubview(footerView)
     }
     
     private func configureAppearance() {
         title = .tasks
+        view.backgroundColor = .darkGray
+        
         navigationController?.navigationBar.largeTitleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
@@ -46,6 +51,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
         ]
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isTranslucent = false
     
         tableView.backgroundColor = .black
         tableView.dataSource = self
@@ -56,6 +62,8 @@ final class ListViewController: UIViewController, ListViewProtocol {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.barTintColor = .black
         searchBar.placeholder = .search
+        
+        footerView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func configureLayout() {
@@ -64,8 +72,12 @@ final class ListViewController: UIViewController, ListViewProtocol {
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
+            footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: footerView.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -73,6 +85,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
 
     func showTasks(tasks: [ToDoItem]) {
         taskList = tasks
+        footerView.configure(with: tasks.count)
         tableView.reloadData()
     }
 }

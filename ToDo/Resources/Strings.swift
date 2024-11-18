@@ -10,4 +10,5 @@ import Foundation
 extension String {
     static let tasks = "Задачи"
     static let search = "Search"
+    static let taskCount = "Задач"
 }
