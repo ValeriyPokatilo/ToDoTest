@@ -13,8 +13,20 @@ protocol ListRouterProtocol {
 
 final class ListRouter: ListRouterProtocol {
     static func createListModule() -> UINavigationController {
-        let controller = ListViewController()
-        let navigationController = UINavigationController(rootViewController: controller)
+        let controller: ListViewProtocol = ListViewController()
+        let presenter: ListPresenterProtocol = ListPresenter()
+        let interactor: ListInteractorProtocol = ListInteractor()
+        
+        controller.presenter = presenter
+        presenter.view = controller
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        
+        guard let viewController = controller as? UIViewController else {
+            return UINavigationController()
+        }
+        
+        let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
     }
 }

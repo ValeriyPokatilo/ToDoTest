@@ -36,7 +36,7 @@ final class ToDoListCell: UITableViewCell {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 12)
         label.numberOfLines = 1
         label.textColor = .white
         label.layer.opacity = 0.5
@@ -57,7 +57,7 @@ final class ToDoListCell: UITableViewCell {
     
     func configure(with model: ToDoItem) {
         descriptionLabel.text = model.description
-        dateLabel.text = model.description
+        dateLabel.text = model.date
         
         if model.completed {
             icon.image = UIImage(systemName: "checkmark.circle")
@@ -80,6 +80,7 @@ final class ToDoListCell: UITableViewCell {
     
     private func configureAppearance() {
         backgroundColor = .black
+        selectionStyle = .none
     }
     
     private func addViews() {

@@ -7,17 +7,28 @@
 
 import UIKit
 
-final class ListViewController: UIViewController {
+protocol ListViewProtocol: AnyObject {
+    var presenter: ListPresenterProtocol? { get set }
+    func showTasks(tasks: [ToDoItem])
+}
+
+final class ListViewController: UIViewController, ListViewProtocol {
+    
+    var presenter: ListPresenterProtocol?
     
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
     private let cellId = "cell"
+    
+    private var taskList = [ToDoItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
         configureAppearance()
         configureLayout()
+        
+        presenter?.getTasks()
     }
     
     private func addViews() {
@@ -59,16 +70,21 @@ final class ListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+
+    func showTasks(tasks: [ToDoItem]) {
+        taskList = tasks
+        tableView.reloadData()
+    }
 }
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return taskList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ToDoListCell()
-        cell.configure(with: ToDoItem(title: "title", description: "description", date: "01/01/2025", completed: indexPath.row % 2 == 0))
+        cell.configure(with: taskList[indexPath.row])
         return cell
     }
 }
