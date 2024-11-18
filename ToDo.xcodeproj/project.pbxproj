@@ -26,6 +26,7 @@
 		761572AF2CEBB60E00375EFC /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572AE2CEBB60E00375EFC /* DetailsInteractor.swift */; };
 		761572B12CEBB66700375EFC /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B02CEBB66700375EFC /* DetailsPresenter.swift */; };
 		761572B32CEBB77B00375EFC /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B22CEBB77B00375EFC /* DetailsRouter.swift */; };
+		761572B52CEBCFF100375EFC /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B42CEBCFF100375EFC /* Aliases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		761572AE2CEBB60E00375EFC /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		761572B02CEBB66700375EFC /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		761572B22CEBB77B00375EFC /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
+		761572B42CEBCFF100375EFC /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				761572A72CEBB24400375EFC /* DetailsModule */,
 				761572192CEB98E700375EFC /* CoreData */,
 				761572242CEB9FAE00375EFC /* Extensions */,
+				761572B62CEBDA7500375EFC /* Aliases */,
 				7615720A2CEB655700375EFC /* Resources */,
 			);
 			path = ToDo;
@@ -226,6 +229,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		761572B62CEBDA7500375EFC /* Aliases */ = {
+			isa = PBXGroup;
+			children = (
+				761572B42CEBCFF100375EFC /* Aliases.swift */,
+			);
+			path = Aliases;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -313,6 +324,7 @@
 				761571EF2CEB4EE600375EFC /* ListViewController.swift in Sources */,
 				761572B32CEBB77B00375EFC /* DetailsRouter.swift in Sources */,
 				761572AD2CEBB29E00375EFC /* DetailsViewController.swift in Sources */,
+				761572B52CEBCFF100375EFC /* Aliases.swift in Sources */,
 				761571F72CEB528900375EFC /* ToDoListCell.swift in Sources */,
 				7615720C2CEB657300375EFC /* Strings.swift in Sources */,
 				761572B12CEBB66700375EFC /* DetailsPresenter.swift in Sources */,

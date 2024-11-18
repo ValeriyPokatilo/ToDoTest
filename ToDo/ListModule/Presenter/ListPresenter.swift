@@ -16,6 +16,8 @@ protocol ListPresenterProtocol: AnyObject {
     func didLoadTasks()
     func showAlert(error: Error)
     func showDetails(task: Task)
+    func deleteTask(task: Task, completion: @escaping EmptyBlock)
+    func shareTask(task: Task)
 }
 
 final class ListPresenter: ListPresenterProtocol {
@@ -45,5 +47,13 @@ final class ListPresenter: ListPresenterProtocol {
             return
         }
         router?.showDetails(view: view, task: task)
+    }
+    
+    func deleteTask(task: Task, completion: @escaping EmptyBlock) {
+        interactor?.deleteTask(task: task, completion: completion)
+    }
+    
+    func shareTask(task: Task) {
+        view?.shareTask(shareText: "Задача: \(task.title ?? ""), содержание: \(task.description)")
     }
 }

@@ -9,6 +9,10 @@ import UIKit
 
 final class ToDoListCell: UITableViewCell {
     
+    var didSelectEdit: EmptyBlock?
+    var didSelectShare: EmptyBlock?
+    var didSelectDelete: EmptyBlock?
+    
     private let icon: UIImageView = {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
@@ -83,6 +87,9 @@ final class ToDoListCell: UITableViewCell {
     private func configureAppearance() {
         backgroundColor = .black
         selectionStyle = .none
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        self.addInteraction(interaction)
     }
     
     private func addViews() {
@@ -112,5 +119,34 @@ final class ToDoListCell: UITableViewCell {
             dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 52),
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
         ])
+    }
+}
+
+extension ToDoListCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let editAction = UIAction(
+                title: .edit,
+                image: UIImage(systemName: "pencil")
+            ) { [weak self] _ in
+                self?.didSelectEdit?()
+            }
+            
+            let shareAction = UIAction(
+                title: .share,
+                image: UIImage(systemName: "square.and.arrow.up")
+            ) { [weak self] _ in
+                self?.didSelectShare?()
+            }
+            
+            let deleteAction = UIAction(
+                title: .delete, image: UIImage(systemName: "trash"),
+                attributes: .destructive
+            ) {[weak self] _ in
+                self?.didSelectDelete?()
+            }
+
+            return UIMenu(title: "", children: [editAction, shareAction, deleteAction])
+        }
     }
 }

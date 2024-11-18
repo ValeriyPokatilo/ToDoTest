@@ -11,6 +11,7 @@ protocol ListViewProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
     func showTasks(tasks: [Task])
     func showAlert(error: Error)
+    func shareTask(shareText: String)
 }
 
 final class ListViewController: UIViewController, ListViewProtocol {
@@ -112,7 +113,33 @@ extension ListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ToDoListCell()
+        let task = taskList[indexPath.row]
+        
+        cell.didSelectEdit = { [weak self] in
+            self?.presenter?.showDetails(task: task)
+        }
+        
+        cell.didSelectShare = { [weak self] in
+            self?.presenter?.shareTask(task: task)
+        }
+        
+        cell.didSelectDelete = { [weak self] in
+            guard let self else {
+                return
+            }
+            self.presenter?.deleteTask(task: task) {
+                self.taskList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                self.footerView.configure(with: self.taskList.count)
+            }
+        }
+        
         cell.configure(with: taskList[indexPath.row])
         return cell
+    }
+    
+    func shareTask(shareText: String) {
+        let activityViewController = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 }

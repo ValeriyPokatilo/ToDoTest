@@ -60,6 +60,17 @@ final class CoreDataManager {
         saveContext()
     }
     
+    func delete(task: Task, completion: @escaping EmptyBlock) {
+            context.delete(task)
+            
+            do {
+                try context.save()
+                completion()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+    
     func saveContext() {
         if context.hasChanges {
             do {

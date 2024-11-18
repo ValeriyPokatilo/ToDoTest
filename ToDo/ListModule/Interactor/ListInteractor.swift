@@ -10,6 +10,7 @@ import Foundation
 protocol ListInteractorProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
     func getTasks()
+    func deleteTask(task: Task, completion: @escaping EmptyBlock)
 }
 
 final class ListInteractor: ListInteractorProtocol {
@@ -18,10 +19,14 @@ final class ListInteractor: ListInteractorProtocol {
     
     func getTasks() {
         if isFirstLaunch() {
-            loaFromJson()
+            loadFromJson()
         } else {
             loadFromCoreData()
         }
+    }
+    
+    func deleteTask(task: Task, completion: @escaping EmptyBlock) {
+        CoreDataManager.shared.delete(task: task, completion: completion)
     }
     
     private func loadFromCoreData() {
@@ -39,7 +44,7 @@ final class ListInteractor: ListInteractorProtocol {
         }
     }
     
-    private func loaFromJson() {
+    private func loadFromJson() {
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             let apiString = "https://dummyjson.com/todos"
             guard let url = URL(string: apiString) else {
@@ -57,7 +62,7 @@ final class ListInteractor: ListInteractorProtocol {
                     let dummyData = try? JSONDecoder().decode(DummyData.self, from: data)
 
                     dummyData?.todos.forEach {
-                        CoreDataManager().createElement(title: $0.todo, description: "", completed: $0.completed)
+                        CoreDataManager().createElement(title: $0.todo, description: "empty", completed: $0.completed)
                     }
                     
                     self?.getTasks()
