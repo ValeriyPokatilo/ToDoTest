@@ -14,4 +14,5 @@ extension String {
     static let edit = "Редактировать"
     static let share = "Поделиться"
     static let delete = "Удалить"
+    static let back = "Назад"
 }

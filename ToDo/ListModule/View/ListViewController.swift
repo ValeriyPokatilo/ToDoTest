@@ -51,9 +51,11 @@ final class ListViewController: UIViewController, ListViewProtocol {
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
+        navigationController?.navigationBar.tintColor = .yellow
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isTranslucent = false
+        navigationItem.backButtonTitle = .back
     
         tableView.backgroundColor = .black
         tableView.dataSource = self
