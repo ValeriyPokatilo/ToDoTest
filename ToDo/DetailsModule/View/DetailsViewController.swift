@@ -15,14 +15,14 @@ protocol DetailsViewProtocol: AnyObject {
 final class DetailsViewController: UIViewController, DetailsViewProtocol {
     
     var presenter: DetailsPresenterProtocol?
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 34, weight: .bold)
-        label.numberOfLines = 1
-        label.textColor = .white
-        return label
+        
+    private let titleTextField: UITextField = {
+        let titleTextField = UITextField()
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+        titleTextField.font = .systemFont(ofSize: 34, weight: .bold)
+        titleTextField.textColor = .white
+        titleTextField.returnKeyType = .continue
+        return titleTextField
     }()
     
     private let dateLabel: UILabel = {
@@ -35,12 +35,14 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         return label
     }()
     
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .white
-        return label
+    private let descriptionTextView: UITextView = {
+        let descriptionTextView = UITextView()
+        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionTextView.font = .systemFont(ofSize: 16)
+        descriptionTextView.textColor = .white
+        descriptionTextView.backgroundColor = .black
+        descriptionTextView.returnKeyType = .go
+        return descriptionTextView
     }()
     
     override func viewDidLoad() {
@@ -53,34 +55,60 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     }
     
     private func addViews() {
-        view.addSubview(titleLabel)
+        view.addSubview(titleTextField)
         view.addSubview(dateLabel)
-        view.addSubview(descriptionLabel)
+        view.addSubview(descriptionTextView)
     }
     
     private func configureAppearance() {
         view.backgroundColor = .black
+        titleTextField.delegate = self
+        titleTextField.becomeFirstResponder()
+        descriptionTextView.delegate = self
     }
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            dateLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8),
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            descriptionLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            descriptionTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
+            descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 16),
+            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
     }
     
     func showTask(task: Task) {
-        titleLabel.text = task.title
+        titleTextField.text = task.title
         dateLabel.text = task.date?.toString()
-        descriptionLabel.text = task.desc
+        descriptionTextView.text = task.desc
+    }
+}
+
+extension DetailsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        descriptionTextView.becomeFirstResponder()
+        return true
+    }
+}
+
+extension DetailsViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            if let task = presenter?.task {
+                presenter?.updateTask(task: task, title: titleTextField.text ?? "", description: descriptionTextView.text)
+            } else {
+                presenter?.createTask(title: titleTextField.text ?? "", description: descriptionTextView.text)
+            }
+            return false
+        }
+        return true
     }
 }

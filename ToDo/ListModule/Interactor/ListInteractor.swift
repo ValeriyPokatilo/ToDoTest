@@ -70,7 +70,7 @@ final class ListInteractor: ListInteractorProtocol {
                     let dummyData = try? JSONDecoder().decode(DummyData.self, from: data)
 
                     dummyData?.todos.forEach {
-                        CoreDataManager().createElement(title: $0.todo, description: "empty", completed: $0.completed)
+                        CoreDataManager.shared.saveElement(title: $0.todo, description: $0.todo, completed: $0.completed)
                     }
                     
                     self?.getTasks()

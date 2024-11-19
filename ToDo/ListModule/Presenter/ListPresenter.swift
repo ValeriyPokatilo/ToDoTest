@@ -13,9 +13,8 @@ protocol ListPresenterProtocol: AnyObject {
     var router: ListRouterProtocol? { get set }
     func getTasks(searchText: String?)
     func didGetTasks(tasks: [Task])
-    func didLoadTasks()
     func showAlert(title: String)
-    func showDetails(task: Task?)
+    func showDetails(task: Task?, updateBlock: @escaping EmptyBlock)
     func deleteTask(task: Task, completion: @escaping EmptyBlock)
     func shareTask(task: Task)
     func startSpeechRecognition()
@@ -38,19 +37,17 @@ final class ListPresenter: ListPresenterProtocol {
         view?.showTasks(tasks: tasks)
     }
     
-    func didLoadTasks() {
-        
-    }
-    
     func showAlert(title: String) {
         view?.showAlert(title: title)
     }
     
-    func showDetails(task: Task?) {
+    func showDetails(task: Task?, updateBlock: @escaping EmptyBlock) {
         guard let view else {
             return
         }
-        router?.showDetails(view: view, task: task)
+        router?.showDetails(view: view, task: task) {
+            updateBlock()
+        }
     }
     
     func deleteTask(task: Task, completion: @escaping EmptyBlock) {

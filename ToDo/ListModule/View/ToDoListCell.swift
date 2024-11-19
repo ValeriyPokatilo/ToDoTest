@@ -61,7 +61,7 @@ final class ToDoListCell: UITableViewCell {
     }
     
     func configure(with model: Task) {
-        descriptionLabel.text = model.description
+        descriptionLabel.text = model.desc
         if let date = model.date {
             dateLabel.text = date.toString()
         }

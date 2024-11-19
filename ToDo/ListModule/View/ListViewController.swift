@@ -81,7 +81,9 @@ final class ListViewController: UIViewController, ListViewProtocol {
         
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.onCreateTap = { [weak self] in
-            self?.presenter?.showDetails(task: nil)
+            self?.presenter?.showDetails(task: nil) {
+                self?.presenter?.getTasks(searchText: nil)
+            }
         }
     }
     
@@ -123,7 +125,9 @@ final class ListViewController: UIViewController, ListViewProtocol {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task = taskList[indexPath.row]
-        presenter?.showDetails(task: task)
+        presenter?.showDetails(task: task) { [weak self] in
+            self?.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
     }
 }
 
@@ -137,7 +141,9 @@ extension ListViewController: UITableViewDataSource {
         let task = taskList[indexPath.row]
         
         cell.didSelectEdit = { [weak self] in
-            self?.presenter?.showDetails(task: task)
+            self?.presenter?.showDetails(task: task) {
+                self?.tableView.reloadRows(at: [indexPath], with: .fade)
+            }
         }
         
         cell.didSelectShare = { [weak self] in

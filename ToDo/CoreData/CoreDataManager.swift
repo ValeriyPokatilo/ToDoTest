@@ -28,7 +28,7 @@ final class CoreDataManager {
     func fetchTasks(searchText: String?) -> Result<[Task], Error> {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Task")
         
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         if let text = searchText, !text.isEmpty {
@@ -50,16 +50,50 @@ final class CoreDataManager {
         }
     }
     
-    func createElement(title: String, description: String, completed: Bool = false) {
-        let element = Task(context: context)
-        element.title = title
-        element.desc = description
-        element.completed = completed
-        element.date = Date()
+    func saveElement(
+        task: Task? = nil,
+        title: String? = nil,
+        description: String? = nil,
+        completed: Bool? = nil,
+        completion: EmptyBlock? = nil
+    ) {
+        let element: Task
         
-        saveContext()
+        if let task {
+            element = task
+        } else {
+            element = Task(context: context)
+            element.date = Date()
+        }
+        
+        if let title {
+            element.title = title
+        }
+        
+        if let description {
+            element.desc = description
+        }
+   
+        if let completed {
+            element.completed = completed
+        }
+        
+        do {
+            try context.save()
+            completion?()
+        } catch let error {
+            fatalError(error.localizedDescription)
+            // TODO: - return result
+        }
+        
+        do {
+            try context.save()
+            completion?()
+        } catch let error {
+            fatalError(error.localizedDescription)
+        }
     }
-    
+
     func toggleElement(task: Task) {
         task.completed.toggle()
         saveContext()
