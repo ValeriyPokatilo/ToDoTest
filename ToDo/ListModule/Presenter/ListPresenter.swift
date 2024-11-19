@@ -11,7 +11,7 @@ protocol ListPresenterProtocol: AnyObject {
     var view: ListViewProtocol? { get set }
     var interactor: ListInteractorProtocol? { get set }
     var router: ListRouterProtocol? { get set }
-    func getTasks()
+    func getTasks(searchText: String?)
     func didGetTasks(tasks: [Task])
     func didLoadTasks()
     func showAlert(error: Error)
@@ -26,8 +26,8 @@ final class ListPresenter: ListPresenterProtocol {
     var interactor: ListInteractorProtocol?
     var router: ListRouterProtocol?
 
-    func getTasks() {
-        interactor?.getTasks()
+    func getTasks(searchText: String?) {
+        interactor?.getTasks(searchText: searchText)
     }
     
     func didGetTasks(tasks: [Task]) {

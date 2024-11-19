@@ -32,7 +32,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
         configureAppearance()
         configureLayout()
                 
-        presenter?.getTasks()
+        presenter?.getTasks(searchText: nil)
     }
     
     private func addViews() {
@@ -67,6 +67,16 @@ final class ListViewController: UIViewController, ListViewProtocol {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.barTintColor = .black
         searchBar.placeholder = .search
+        searchBar.delegate = self
+        
+        let micImage = UIImage(systemName: "microphone.fill")
+        searchBar.setImage(micImage, for: .bookmark, state: .normal)
+        searchBar.showsBookmarkButton = true
+        
+        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+            textField.textColor = .white.withAlphaComponent(0.5)
+            textField.backgroundColor = .darkGray
+        }
         
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.onCreateTap = { [weak self] in
@@ -151,5 +161,15 @@ extension ListViewController: UITableViewDataSource {
     func shareTask(shareText: String) {
         let activityViewController = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+extension ListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter?.getTasks(searchText: searchText)
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        
     }
 }

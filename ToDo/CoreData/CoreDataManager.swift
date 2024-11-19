@@ -33,7 +33,7 @@ final class CoreDataManager {
         
         if let text = searchText, !text.isEmpty {
             let predicate = NSPredicate(
-                format: "title CONTAINS[cd] %@ OR author CONTAINS[cd] %@ OR date CONTAINS[cd] %@",
+                format: "title CONTAINS[cd] %@ OR desc CONTAINS[cd] %@",
                 text,
                 text,
                 text

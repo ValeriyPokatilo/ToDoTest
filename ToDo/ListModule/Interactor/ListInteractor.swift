@@ -9,7 +9,7 @@ import Foundation
 
 protocol ListInteractorProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
-    func getTasks()
+    func getTasks(searchText: String?)
     func deleteTask(task: Task, completion: @escaping EmptyBlock)
 }
 
@@ -17,11 +17,11 @@ final class ListInteractor: ListInteractorProtocol {
     
     weak var presenter: ListPresenterProtocol?
     
-    func getTasks() {
+    func getTasks(searchText: String? = nil) {
         if isFirstLaunch() {
             loadFromJson()
         } else {
-            loadFromCoreData()
+            loadFromCoreData(searchText: searchText)
         }
     }
     
@@ -29,9 +29,9 @@ final class ListInteractor: ListInteractorProtocol {
         CoreDataManager.shared.delete(task: task, completion: completion)
     }
     
-    private func loadFromCoreData() {
+    private func loadFromCoreData(searchText: String? = nil) {
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            let result = CoreDataManager.shared.fetchTasks(searchText: nil)
+            let result = CoreDataManager.shared.fetchTasks(searchText: searchText)
             
             DispatchQueue.main.async {
                 switch result {
