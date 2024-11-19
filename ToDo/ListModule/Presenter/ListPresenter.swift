@@ -14,10 +14,12 @@ protocol ListPresenterProtocol: AnyObject {
     func getTasks(searchText: String?)
     func didGetTasks(tasks: [Task])
     func didLoadTasks()
-    func showAlert(error: Error)
+    func showAlert(title: String)
     func showDetails(task: Task?)
     func deleteTask(task: Task, completion: @escaping EmptyBlock)
     func shareTask(task: Task)
+    func startSpeechRecognition()
+    func didRecognizeSpeech(text: String)
 }
 
 final class ListPresenter: ListPresenterProtocol {
@@ -25,6 +27,8 @@ final class ListPresenter: ListPresenterProtocol {
     var view: ListViewProtocol?
     var interactor: ListInteractorProtocol?
     var router: ListRouterProtocol?
+    
+    private var timeoutTimer: Timer?
 
     func getTasks(searchText: String?) {
         interactor?.getTasks(searchText: searchText)
@@ -38,8 +42,8 @@ final class ListPresenter: ListPresenterProtocol {
         
     }
     
-    func showAlert(error: Error) {
-        view?.showAlert(error: error)
+    func showAlert(title: String) {
+        view?.showAlert(title: title)
     }
     
     func showDetails(task: Task?) {
@@ -55,5 +59,28 @@ final class ListPresenter: ListPresenterProtocol {
     
     func shareTask(task: Task) {
         view?.shareTask(shareText: "Задача: \(task.title ?? ""), содержание: \(task.description)")
+    }
+    
+    func startSpeechRecognition() {
+        interactor?.startSpeechRecognition()
+        
+        timeoutTimer?.invalidate()
+        timeoutTimer = Timer.scheduledTimer(
+            timeInterval: 5.0,
+            target: self,
+            selector: #selector(stopOnTimeout),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+    
+    func didRecognizeSpeech(text: String) {
+        view?.setSearchText(text: text)
+    }
+    
+    @objc private func stopOnTimeout() {
+        interactor?.stopSpeechRecognition()
+        timeoutTimer?.invalidate()
+        timeoutTimer = nil
     }
 }

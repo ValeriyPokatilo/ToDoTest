@@ -10,8 +10,9 @@ import UIKit
 protocol ListViewProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
     func showTasks(tasks: [Task])
-    func showAlert(error: Error)
+    func showAlert(title: String)
     func shareTask(shareText: String)
+    func setSearchText(text: String)
 }
 
 final class ListViewController: UIViewController, ListViewProtocol {
@@ -107,10 +108,15 @@ final class ListViewController: UIViewController, ListViewProtocol {
         tableView.reloadData()
     }
     
-    func showAlert(error: Error) {
-        let alert = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
+    func showAlert(title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setSearchText(text: String) {
+        searchBar.text = text
+        searchBar.delegate?.searchBar?(searchBar, textDidChange: text)
     }
 }
 
@@ -142,6 +148,7 @@ extension ListViewController: UITableViewDataSource {
             guard let self else {
                 return
             }
+            
             self.presenter?.deleteTask(task: task) {
                 self.taskList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -170,6 +177,6 @@ extension ListViewController: UISearchBarDelegate {
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        
+        presenter?.startSpeechRecognition()
     }
 }

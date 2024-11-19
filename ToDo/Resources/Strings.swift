@@ -15,4 +15,5 @@ extension String {
     static let share = "Поделиться"
     static let delete = "Удалить"
     static let back = "Назад"
+    static let accessDenied = "Access denied"
 }
