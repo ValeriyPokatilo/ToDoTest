@@ -12,8 +12,9 @@ final class ToDoListCell: UITableViewCell {
     var didSelectEdit: EmptyBlock?
     var didSelectShare: EmptyBlock?
     var didSelectDelete: EmptyBlock?
+    var didToggleCheckmark: EmptyBlock?
     
-    private let icon: UIImageView = {
+    private let iconView: UIImageView = {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
@@ -66,8 +67,8 @@ final class ToDoListCell: UITableViewCell {
         }
         
         if model.completed {
-            icon.image = UIImage(systemName: "checkmark.circle")
-            icon.tintColor = .yellow
+            iconView.image = UIImage(systemName: "checkmark.circle")
+            iconView.tintColor = .yellow
             titleLabel.layer.opacity = 0.5
             let attributedText = NSAttributedString(
                 string: model.title ?? "",
@@ -78,8 +79,8 @@ final class ToDoListCell: UITableViewCell {
             titleLabel.attributedText = attributedText
             descriptionLabel.layer.opacity = 0.5
         } else {
-            icon.tintColor = .gray
-            icon.image = UIImage(systemName: "circle")
+            iconView.tintColor = .gray
+            iconView.image = UIImage(systemName: "circle")
             titleLabel.text = model.title
         }
     }
@@ -88,37 +89,45 @@ final class ToDoListCell: UITableViewCell {
         backgroundColor = .black
         selectionStyle = .none
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        iconView.addGestureRecognizer(tapGesture)
+        iconView.isUserInteractionEnabled = true
+        
         let interaction = UIContextMenuInteraction(delegate: self)
         self.addInteraction(interaction)
     }
     
     private func addViews() {
-        addSubview(icon)
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
-        addSubview(dateLabel)
+        contentView.addSubview(iconView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(dateLabel)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            icon.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            icon.heightAnchor.constraint(equalToConstant: 24),
-            icon.widthAnchor.constraint(equalToConstant: 24),
+            iconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            iconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            iconView.heightAnchor.constraint(equalToConstant: 24),
+            iconView.widthAnchor.constraint(equalToConstant: 24),
             
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 52),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 52),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 6),
             dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 6),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 52),
-            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 52),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ])
+    }
+    
+    @objc private func handleTap() {
+        didToggleCheckmark?()
     }
 }
 

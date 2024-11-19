@@ -60,6 +60,11 @@ final class CoreDataManager {
         saveContext()
     }
     
+    func toggleElement(task: Task) {
+        task.completed.toggle()
+        saveContext()
+    }
+    
     func delete(task: Task, completion: @escaping EmptyBlock) {
             context.delete(task)
             
