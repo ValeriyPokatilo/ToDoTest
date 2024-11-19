@@ -21,6 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        CoreDataManager.shared.saveContext()
+        DispatchQueue.global(qos: .background).async {
+            CoreDataManager.shared.saveContext()
+        }
     }
 }

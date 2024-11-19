@@ -57,63 +57,71 @@ final class CoreDataManager {
         completed: Bool? = nil,
         completion: EmptyBlock? = nil
     ) {
-        let element: Task
-        
-        if let task {
-            element = task
-        } else {
-            element = Task(context: context)
-            element.date = Date()
-        }
-        
-        if let title {
-            element.title = title
-        }
-        
-        if let description {
-            element.desc = description
-        }
-   
-        if let completed {
-            element.completed = completed
-        }
-        
-        do {
-            try context.save()
-            completion?()
-        } catch let error {
-            fatalError(error.localizedDescription)
-            // TODO: - return result
-        }
-        
-        do {
-            try context.save()
-            completion?()
-        } catch let error {
-            fatalError(error.localizedDescription)
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            let element: Task
+            
+            if let task {
+                element = task
+            } else {
+                element = Task(context: self.context)
+                element.date = Date()
+            }
+            
+            if let title {
+                element.title = title
+            }
+            
+            if let description {
+                element.desc = description
+            }
+            
+            if let completed {
+                element.completed = completed
+            }
+            
+            do {
+                try context.save()
+                DispatchQueue.main.async {
+                    completion?()
+                }
+            } catch let error {
+                fatalError(error.localizedDescription)
+            }
         }
     }
-
+    
     func toggleElement(task: Task) {
         task.completed.toggle()
         
         do {
-            try context.save()
+            try self.context.save()
         } catch {
             fatalError(error.localizedDescription)
         }
     }
     
     func deleteElement(task: Task, completion: @escaping EmptyBlock) {
-            context.delete(task)
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            self.context.delete(task)
             
             do {
-                try context.save()
-                completion()
+                try self.context.save()
+                DispatchQueue.main.async {
+                    completion()
+                }
             } catch {
                 fatalError(error.localizedDescription)
             }
         }
+    }
     
     func saveContext() {
         if context.hasChanges {

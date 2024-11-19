@@ -31,7 +31,7 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             view?.showTask(task: task)
         }
     }
-    
+
     func createTask(title: String, description: String) {
         interactor?.createTask(title: title, description: description) { [weak self] in
             if let view = self?.view {

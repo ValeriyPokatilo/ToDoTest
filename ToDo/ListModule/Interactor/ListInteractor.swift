@@ -72,7 +72,7 @@ final class ListInteractor: ListInteractorProtocol {
                         CoreDataManager.shared.saveElement(title: $0.todo, description: $0.todo, completed: $0.completed)
                     }
                     
-                    self?.getTasks()
+                    self?.loadFromCoreData()
                 }
             }
             

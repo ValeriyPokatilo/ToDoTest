@@ -161,8 +161,12 @@ extension ListViewController: UITableViewDataSource {
         }
         
         cell.didToggleCheckmark = { [weak self] in
-            CoreDataManager.shared.toggleElement(task: task)
-            self?.tableView.reloadRows(at: [indexPath], with: .fade)
+            DispatchQueue.global(qos: .userInteractive).async {
+                CoreDataManager.shared.toggleElement(task: task)
+                DispatchQueue.main.async {
+                    self?.tableView.reloadRows(at: [indexPath], with: .fade)
+                }
+            }
         }
         
         cell.configure(with: taskList[indexPath.row])
