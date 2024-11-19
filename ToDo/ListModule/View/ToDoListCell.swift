@@ -7,12 +7,23 @@
 
 import UIKit
 
+fileprivate enum Constant {
+    static let horizontalOffset: CGFloat = 20
+    static let verticalOffset: CGFloat = 12
+    static let labelsLeadingOffset: CGFloat = 52
+    static let titleLeadingOffset: CGFloat = 8
+    static let interlineOffset: CGFloat = 6
+    static let iconSize: CGFloat = 24
+}
+
 final class ToDoListCell: UITableViewCell {
     
     var didSelectEdit: EmptyBlock?
     var didSelectShare: EmptyBlock?
     var didSelectDelete: EmptyBlock?
     var didToggleCheckmark: EmptyBlock?
+    
+    static let id = "ToDoListCellId"
     
     private let iconView: UIImageView = {
         let icon = UIImageView()
@@ -47,8 +58,7 @@ final class ToDoListCell: UITableViewCell {
         label.layer.opacity = 0.5
         return label
     }()
-    
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureAppearance()
@@ -60,18 +70,13 @@ final class ToDoListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: Task) {
-        descriptionLabel.text = model.desc
-        if let date = model.date {
-            dateLabel.text = date.toString()
-        }
-        
-        if model.completed {
+    func configure(with task: Task) {
+        if task.completed {
             iconView.image = UIImage(systemName: "checkmark.circle")
             iconView.tintColor = .yellow
             titleLabel.layer.opacity = 0.5
             let attributedText = NSAttributedString(
-                string: model.title ?? "",
+                string: task.title.emptyIfNil,
                 attributes: [
                     .strikethroughStyle: NSUnderlineStyle.single.rawValue
                 ]
@@ -81,8 +86,11 @@ final class ToDoListCell: UITableViewCell {
         } else {
             iconView.tintColor = .gray
             iconView.image = UIImage(systemName: "circle")
-            titleLabel.text = model.title
+            titleLabel.text = task.title
         }
+        
+        descriptionLabel.text = task.desc
+        dateLabel.text = task.date.toString
     }
     
     private func configureAppearance() {
@@ -106,23 +114,22 @@ final class ToDoListCell: UITableViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            iconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            iconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            iconView.heightAnchor.constraint(equalToConstant: 24),
-            iconView.widthAnchor.constraint(equalToConstant: 24),
+            iconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constant.verticalOffset),
+            iconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constant.horizontalOffset),
+            iconView.heightAnchor.constraint(equalToConstant: Constant.iconSize),
+            iconView.widthAnchor.constraint(equalToConstant: Constant.iconSize),
             
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constant.verticalOffset),
+            titleLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: Constant.titleLeadingOffset),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constant.horizontalOffset),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 52),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constant.interlineOffset),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constant.labelsLeadingOffset),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constant.horizontalOffset),
             
-            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 6),
-            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 6),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 52),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constant.interlineOffset),
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constant.labelsLeadingOffset),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constant.verticalOffset),
         ])
     }
     
@@ -132,7 +139,10 @@ final class ToDoListCell: UITableViewCell {
 }
 
 extension ToDoListCell: UIContextMenuInteractionDelegate {
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+    func contextMenuInteraction(
+        _ interaction: UIContextMenuInteraction,
+        configurationForMenuAtLocation location: CGPoint
+    ) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let editAction = UIAction(
                 title: .edit,

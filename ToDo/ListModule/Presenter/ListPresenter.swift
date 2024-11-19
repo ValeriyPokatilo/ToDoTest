@@ -45,6 +45,7 @@ final class ListPresenter: ListPresenterProtocol {
         guard let view else {
             return
         }
+        
         router?.showDetails(view: view, task: task) {
             updateBlock()
         }
@@ -55,7 +56,7 @@ final class ListPresenter: ListPresenterProtocol {
     }
     
     func shareTask(task: Task) {
-        view?.shareTask(shareText: "Задача: \(task.title ?? ""), содержание: \(task.description)")
+        view?.shareTask(shareText: "Задача: \(task.title.emptyIfNil), содержание: \(task.description)")
     }
     
     func startSpeechRecognition() {

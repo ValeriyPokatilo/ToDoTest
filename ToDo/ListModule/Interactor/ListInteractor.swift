@@ -34,7 +34,7 @@ final class ListInteractor: ListInteractorProtocol {
     }
     
     func deleteTask(task: Task, completion: @escaping EmptyBlock) {
-        CoreDataManager.shared.delete(task: task, completion: completion)
+        CoreDataManager.shared.deleteElement(task: task, completion: completion)
     }
     
     private func loadFromCoreData(searchText: String? = nil) {
@@ -54,8 +54,7 @@ final class ListInteractor: ListInteractorProtocol {
     
     private func loadFromJson() {
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            let apiString = "https://dummyjson.com/todos"
-            guard let url = URL(string: apiString) else {
+            guard let url = URL(string: .apiString) else {
                 return
             }
             let request = URLRequest(url: url)

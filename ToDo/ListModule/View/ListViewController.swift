@@ -23,8 +23,6 @@ final class ListViewController: UIViewController, ListViewProtocol {
     private let tableView = UITableView()
     private var footerView = FooterView()
     
-    private let cellId = "cell"
-    
     private var taskList = [Task]()
 
     override func viewDidLoad() {
@@ -44,7 +42,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
     
     private func configureAppearance() {
         title = .tasks
-        view.backgroundColor = .darkGray
+        view.backgroundColor = .systemGray5
         
         navigationController?.navigationBar.largeTitleTextAttributes = [
             .foregroundColor: UIColor.white
@@ -62,7 +60,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorColor = .gray
-        tableView.register(ToDoListCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ToDoListCell.self, forCellReuseIdentifier: ToDoListCell.id)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +74,7 @@ final class ListViewController: UIViewController, ListViewProtocol {
         
         if let textField = searchBar.value(forKey: "searchField") as? UITextField {
             textField.textColor = .white.withAlphaComponent(0.5)
-            textField.backgroundColor = .darkGray
+            textField.backgroundColor = .systemGray5
         }
         
         footerView.translatesAutoresizingMaskIntoConstraints = false

@@ -7,6 +7,13 @@
 
 import UIKit
 
+fileprivate enum Constant {
+    static let horizontalOffset: CGFloat = 20
+    static let topOffset: CGFloat = 8
+    static let descriptionTopOffset: CGFloat = 16
+
+}
+
 protocol DetailsViewProtocol: AnyObject {
     var presenter: DetailsPresenterProtocol? { get set }
     func showTask(task: Task)
@@ -61,6 +68,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     }
     
     private func configureAppearance() {
+        navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .black
         titleTextField.delegate = self
         titleTextField.becomeFirstResponder()
@@ -69,24 +77,24 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constant.topOffset),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.horizontalOffset),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.horizontalOffset),
             
-            dateLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            dateLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Constant.topOffset),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.horizontalOffset),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.horizontalOffset),
             
-            descriptionTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
-            descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 16),
-            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            descriptionTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: Constant.descriptionTopOffset),
+            descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.horizontalOffset),
+            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.horizontalOffset),
         ])
     }
     
     func showTask(task: Task) {
         titleTextField.text = task.title
-        dateLabel.text = task.date?.toString()
+        dateLabel.text = task.date.toString
         descriptionTextView.text = task.desc
     }
 }
@@ -103,9 +111,16 @@ extension DetailsViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             if let task = presenter?.task {
-                presenter?.updateTask(task: task, title: titleTextField.text ?? "", description: descriptionTextView.text)
+                presenter?.updateTask(
+                    task: task,
+                    title: titleTextField.text.emptyIfNil,
+                    description: descriptionTextView.text
+                )
             } else {
-                presenter?.createTask(title: titleTextField.text ?? "", description: descriptionTextView.text)
+                presenter?.createTask(
+                    title: titleTextField.text.emptyIfNil,
+                    description: descriptionTextView.text
+                )
             }
             return false
         }

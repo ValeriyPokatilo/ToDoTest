@@ -7,8 +7,12 @@
 
 import Foundation
 
-extension Date {
-    func toString() -> String{
+extension Optional where Wrapped == Date {
+    var toString: String {
+        guard let self else {
+            return .empty
+        }
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: self)

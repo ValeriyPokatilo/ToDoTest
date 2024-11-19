@@ -27,6 +27,7 @@
 		761572B12CEBB66700375EFC /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B02CEBB66700375EFC /* DetailsPresenter.swift */; };
 		761572B32CEBB77B00375EFC /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B22CEBB77B00375EFC /* DetailsRouter.swift */; };
 		761572B52CEBCFF100375EFC /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B42CEBCFF100375EFC /* Aliases.swift */; };
+		76EFFA7E2CED221600ACACED /* Ext+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EFFA7D2CED221600ACACED /* Ext+String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		761572B02CEBB66700375EFC /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		761572B22CEBB77B00375EFC /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		761572B42CEBCFF100375EFC /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
+		76EFFA7D2CED221600ACACED /* Ext+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				761572222CEB9F1300375EFC /* Ext+Date.swift */,
+				76EFFA7D2CED221600ACACED /* Ext+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				761572122CEB6EE300375EFC /* ListInteractor.swift in Sources */,
 				761571ED2CEB4EE600375EFC /* AppDelegate.swift in Sources */,
 				761572182CEB8DEA00375EFC /* FooterView.swift in Sources */,
+				76EFFA7E2CED221600ACACED /* Ext+String.swift in Sources */,
 				761572232CEB9F1300375EFC /* Ext+Date.swift in Sources */,
 				761572212CEB9A7000375EFC /* CoreDataManager.swift in Sources */,
 				7615721F2CEB997100375EFC /* ToDo.xcdatamodeld in Sources */,

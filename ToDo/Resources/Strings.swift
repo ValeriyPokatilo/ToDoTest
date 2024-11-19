@@ -8,12 +8,13 @@
 import Foundation
 
 extension String {
+    static let empty = ""
     static let tasks = "Задачи"
     static let search = "Search"
-    static let taskCount = "Задач"
     static let edit = "Редактировать"
     static let share = "Поделиться"
     static let delete = "Удалить"
     static let back = "Назад"
     static let accessDenied = "Access denied"
+    static let apiString = "https://dummyjson.com/todos"
 }

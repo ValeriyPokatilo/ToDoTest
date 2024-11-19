@@ -7,6 +7,12 @@
 
 import UIKit
 
+fileprivate enum Constant {
+    static let verticalOffset: CGFloat = 8
+    static let buttonHeight: CGFloat = 28
+    static let buttonWidth: CGFloat = 68
+}
+
 final class FooterView: UIView {
     
     var onCreateTap: EmptyBlock?
@@ -41,7 +47,7 @@ final class FooterView: UIView {
     }
     
     func configure(with count: Int) {
-        countLabel.text = "\(count) \(String.taskCount)"
+        countLabel.text = getTasksString(for: count)
     }
     
     private func addViews() {
@@ -50,8 +56,7 @@ final class FooterView: UIView {
     }
     
     private func configureAppearance() {
-        countLabel.text = "0 \(String.taskCount)"
-        backgroundColor = .darkGray
+        backgroundColor = .systemGray5
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         iconView.addGestureRecognizer(tapGesture)
         iconView.isUserInteractionEnabled = true
@@ -62,15 +67,33 @@ final class FooterView: UIView {
             countLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             countLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            iconView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            iconView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            iconView.topAnchor.constraint(equalTo: topAnchor, constant: Constant.verticalOffset),
+            iconView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constant.verticalOffset),
             iconView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            iconView.heightAnchor.constraint(equalToConstant: 28),
-            iconView.widthAnchor.constraint(equalToConstant: 68)
+            iconView.heightAnchor.constraint(equalToConstant: Constant.buttonHeight),
+            iconView.widthAnchor.constraint(equalToConstant: Constant.buttonWidth)
         ])
     }
     
     @objc private func handleTap() {
         onCreateTap?()
+    }
+    
+    private func getTasksString(for count: Int) -> String {
+        let remainder100 = count % 100
+        let remainder10 = count % 10
+        
+        let word: String
+        if remainder100 >= 11 && remainder100 <= 19 {
+            word = "задач"
+        } else if remainder10 == 1 {
+            word = "задача"
+        } else if remainder10 >= 2 && remainder10 <= 4 {
+            word = "задачи"
+        } else {
+            word = "задач"
+        }
+        
+        return "\(count) \(word)"
     }
 }

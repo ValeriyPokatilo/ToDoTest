@@ -96,10 +96,15 @@ final class CoreDataManager {
 
     func toggleElement(task: Task) {
         task.completed.toggle()
-        saveContext()
+        
+        do {
+            try context.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
-    func delete(task: Task, completion: @escaping EmptyBlock) {
+    func deleteElement(task: Task, completion: @escaping EmptyBlock) {
             context.delete(task)
             
             do {
