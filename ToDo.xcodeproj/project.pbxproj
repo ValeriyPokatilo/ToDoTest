@@ -27,6 +27,12 @@
 		761572B12CEBB66700375EFC /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B02CEBB66700375EFC /* DetailsPresenter.swift */; };
 		761572B32CEBB77B00375EFC /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B22CEBB77B00375EFC /* DetailsRouter.swift */; };
 		761572B52CEBCFF100375EFC /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B42CEBCFF100375EFC /* Aliases.swift */; };
+		7666874B2CEE018000B52001 /* DetailsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7666874A2CEE018000B52001 /* DetailsPresenterTests.swift */; };
+		7666874D2CEE021300B52001 /* ListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7666874C2CEE021300B52001 /* ListPresenterTests.swift */; };
+		76AE9E352CEDDFF000B5A802 /* ListRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E302CEDDFF000B5A802 /* ListRouterTests.swift */; };
+		76AE9E372CEDE27B00B5A802 /* DetailsRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E362CEDE27B00B5A802 /* DetailsRouterTests.swift */; };
+		76AE9E3A2CEDE4DF00B5A802 /* FooterViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E392CEDE4DF00B5A802 /* FooterViewTests.swift */; };
+		76AE9E3C2CEDE7B700B5A802 /* ToDoListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E3B2CEDE7B700B5A802 /* ToDoListCellTests.swift */; };
 		76EFFA7E2CED221600ACACED /* Ext+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EFFA7D2CED221600ACACED /* Ext+String.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,17 +69,15 @@
 		761572B02CEBB66700375EFC /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		761572B22CEBB77B00375EFC /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		761572B42CEBCFF100375EFC /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
+		7666874A2CEE018000B52001 /* DetailsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenterTests.swift; sourceTree = "<group>"; };
+		7666874C2CEE021300B52001 /* ListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenterTests.swift; sourceTree = "<group>"; };
 		76AE9E082CEDDBA300B5A802 /* ToDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76AE9E302CEDDFF000B5A802 /* ListRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouterTests.swift; sourceTree = "<group>"; };
+		76AE9E362CEDE27B00B5A802 /* DetailsRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouterTests.swift; sourceTree = "<group>"; };
+		76AE9E392CEDE4DF00B5A802 /* FooterViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewTests.swift; sourceTree = "<group>"; };
+		76AE9E3B2CEDE7B700B5A802 /* ToDoListCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCellTests.swift; sourceTree = "<group>"; };
 		76EFFA7D2CED221600ACACED /* Ext+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		76AE9E092CEDDBA300B5A802 /* ToDoTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ToDoTests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		761571CA2CEB4E0100375EFC /* Frameworks */ = {
@@ -97,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				761571EC2CEB4EE600375EFC /* ToDo */,
-				76AE9E092CEDDBA300B5A802 /* ToDoTests */,
+				76AE9E2D2CEDDFA700B5A802 /* ToDoTests */,
 				761571CE2CEB4E0100375EFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -268,6 +272,35 @@
 			path = Aliases;
 			sourceTree = "<group>";
 		};
+		76AE9E2D2CEDDFA700B5A802 /* ToDoTests */ = {
+			isa = PBXGroup;
+			children = (
+				76AE9E322CEDDFF000B5A802 /* ListModule */,
+				76AE9E382CEDE45600B5A802 /* DetailsModule */,
+			);
+			path = ToDoTests;
+			sourceTree = "<group>";
+		};
+		76AE9E322CEDDFF000B5A802 /* ListModule */ = {
+			isa = PBXGroup;
+			children = (
+				76AE9E302CEDDFF000B5A802 /* ListRouterTests.swift */,
+				76AE9E3B2CEDE7B700B5A802 /* ToDoListCellTests.swift */,
+				76AE9E392CEDE4DF00B5A802 /* FooterViewTests.swift */,
+				7666874C2CEE021300B52001 /* ListPresenterTests.swift */,
+			);
+			path = ListModule;
+			sourceTree = "<group>";
+		};
+		76AE9E382CEDE45600B5A802 /* DetailsModule */ = {
+			isa = PBXGroup;
+			children = (
+				76AE9E362CEDE27B00B5A802 /* DetailsRouterTests.swift */,
+				7666874A2CEE018000B52001 /* DetailsPresenterTests.swift */,
+			);
+			path = DetailsModule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -302,9 +335,6 @@
 			);
 			dependencies = (
 				76AE9E0D2CEDDBA300B5A802 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				76AE9E092CEDDBA300B5A802 /* ToDoTests */,
 			);
 			name = ToDoTests;
 			packageProductDependencies = (
@@ -402,6 +432,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76AE9E352CEDDFF000B5A802 /* ListRouterTests.swift in Sources */,
+				76AE9E3A2CEDE4DF00B5A802 /* FooterViewTests.swift in Sources */,
+				7666874D2CEE021300B52001 /* ListPresenterTests.swift in Sources */,
+				76AE9E372CEDE27B00B5A802 /* DetailsRouterTests.swift in Sources */,
+				76AE9E3C2CEDE7B700B5A802 /* ToDoListCellTests.swift in Sources */,
+				7666874B2CEE018000B52001 /* DetailsPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

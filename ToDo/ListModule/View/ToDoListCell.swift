@@ -25,7 +25,7 @@ final class ToDoListCell: UITableViewCell {
     
     static let id = "ToDoListCellId"
     
-    private let iconView: UIImageView = {
+    let iconView: UIImageView = {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon

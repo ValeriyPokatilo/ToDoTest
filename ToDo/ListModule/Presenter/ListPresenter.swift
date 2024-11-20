@@ -21,6 +21,17 @@ protocol ListPresenterProtocol: AnyObject {
     func didRecognizeSpeech(text: String)
 }
 
+extension ListPresenterProtocol {
+    func getTasks(searchText: String?) {}
+    func didGetTasks(tasks: [Task]) {}
+    func showAlert(title: String) {}
+    func showDetails(task: Task?, updateBlock: @escaping EmptyBlock) {}
+    func deleteTask(task: Task, completion: @escaping EmptyBlock) {}
+    func shareTask(task: Task) {}
+    func startSpeechRecognition() {}
+    func didRecognizeSpeech(text: String) {}
+}
+
 final class ListPresenter: ListPresenterProtocol {
 
     var view: ListViewProtocol?

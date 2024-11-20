@@ -17,7 +17,7 @@ final class FooterView: UIView {
     
     var onCreateTap: EmptyBlock?
     
-    private let countLabel: UILabel = {
+    let countLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false

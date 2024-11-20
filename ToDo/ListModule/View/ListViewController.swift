@@ -9,6 +9,7 @@ import UIKit
 
 protocol ListViewProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
+    var taskList: [Task] { get set}
     func showTasks(tasks: [Task])
     func showAlert(title: String)
     func shareTask(shareText: String)
@@ -18,13 +19,12 @@ protocol ListViewProtocol: AnyObject {
 final class ListViewController: UIViewController, ListViewProtocol {
     
     var presenter: ListPresenterProtocol?
+    var taskList = [Task]()
     
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
     private var footerView = FooterView()
     
-    private var taskList = [Task]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
