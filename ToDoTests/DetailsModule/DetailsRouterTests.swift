@@ -9,13 +9,7 @@ import XCTest
 @testable import ToDo
 
 final class DetailsRouterTests: XCTestCase {
-    // Given
-    
-    // When
-    
-    // Then
-    
-    
+
     func testCreateDetailsModule_ReturnsViewController() {
         // Given
         

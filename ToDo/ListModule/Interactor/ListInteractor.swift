@@ -10,6 +10,7 @@ import Speech
 
 protocol ListInteractorProtocol: AnyObject {
     var presenter: ListPresenterProtocol? { get set }
+    var networkService: NetworkServiceProtocol? { get set }
     func getTasks(searchText: String?)
     func deleteTask(task: Task, completion: @escaping EmptyBlock)
     func startSpeechRecognition()
@@ -19,6 +20,7 @@ protocol ListInteractorProtocol: AnyObject {
 final class ListInteractor: ListInteractorProtocol {
     
     weak var presenter: ListPresenterProtocol?
+    var networkService: NetworkServiceProtocol? = NetworkService()
     
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-EN"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -53,31 +55,20 @@ final class ListInteractor: ListInteractorProtocol {
     }
     
     private func loadFromJson() {
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            guard let url = URL(string: .apiString) else {
-                return
-            }
-            let request = URLRequest(url: url)
-            
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error {
-                    self?.presenter?.showAlert(title: error.localizedDescription)
+        networkService?.getTasks(completion: { [weak self] result in
+            switch result {
+            case .success(let dummyTasks):
+                guard let dummyTasks else {
                     return
                 }
                 
-                if let data = data {
-                    let dummyData = try? JSONDecoder().decode(DummyData.self, from: data)
-
-                    dummyData?.todos.forEach {
-                        CoreDataManager.shared.saveElement(title: $0.todo, description: $0.todo, completed: $0.completed)
-                    }
-                    
+                CoreDataManager.shared.saveDummyArray(tasks: dummyTasks) { [weak self] in
                     self?.loadFromCoreData()
                 }
+            case .failure(let error):
+                self?.presenter?.showAlert(title: error.localizedDescription)
             }
-            
-            task.resume()
-        }
+        })
     }
     
     private func isFirstLaunch() -> Bool {
