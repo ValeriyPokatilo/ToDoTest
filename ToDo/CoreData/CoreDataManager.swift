@@ -50,6 +50,24 @@ class CoreDataManager {
         }
     }
     
+    func saveDummyArray(tasks: [DummyTask], completion: @escaping EmptyBlock) {
+        for task in tasks {
+            let element = Task(context: context)
+            element.title = task.todo
+            element.desc = task.todo
+            element.completed = task.completed
+        }
+
+        do {
+            try context.save()
+            DispatchQueue.main.async {
+                completion()
+            }
+        } catch let error {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
     func saveElement(
         task: Task? = nil,
         title: String? = nil,

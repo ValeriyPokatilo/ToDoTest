@@ -29,6 +29,7 @@
 		761572B52CEBCFF100375EFC /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761572B42CEBCFF100375EFC /* Aliases.swift */; };
 		7666874B2CEE018000B52001 /* DetailsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7666874A2CEE018000B52001 /* DetailsPresenterTests.swift */; };
 		7666874D2CEE021300B52001 /* ListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7666874C2CEE021300B52001 /* ListPresenterTests.swift */; };
+		766687502CEE028700B52001 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7666874F2CEE028700B52001 /* NetworkService.swift */; };
 		76AE9E352CEDDFF000B5A802 /* ListRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E302CEDDFF000B5A802 /* ListRouterTests.swift */; };
 		76AE9E372CEDE27B00B5A802 /* DetailsRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E362CEDE27B00B5A802 /* DetailsRouterTests.swift */; };
 		76AE9E3A2CEDE4DF00B5A802 /* FooterViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE9E392CEDE4DF00B5A802 /* FooterViewTests.swift */; };
@@ -71,6 +72,7 @@
 		761572B42CEBCFF100375EFC /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 		7666874A2CEE018000B52001 /* DetailsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenterTests.swift; sourceTree = "<group>"; };
 		7666874C2CEE021300B52001 /* ListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenterTests.swift; sourceTree = "<group>"; };
+		7666874F2CEE028700B52001 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		76AE9E082CEDDBA300B5A802 /* ToDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76AE9E302CEDDFF000B5A802 /* ListRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouterTests.swift; sourceTree = "<group>"; };
 		76AE9E362CEDE27B00B5A802 /* DetailsRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouterTests.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				761571F42CEB504600375EFC /* ListModule */,
 				761572A72CEBB24400375EFC /* DetailsModule */,
 				761572192CEB98E700375EFC /* CoreData */,
+				7666874E2CEE026F00B52001 /* NetworkService */,
 				761572242CEB9FAE00375EFC /* Extensions */,
 				761572B62CEBDA7500375EFC /* Aliases */,
 				7615720A2CEB655700375EFC /* Resources */,
@@ -272,6 +275,14 @@
 			path = Aliases;
 			sourceTree = "<group>";
 		};
+		7666874E2CEE026F00B52001 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				7666874F2CEE028700B52001 /* NetworkService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		76AE9E2D2CEDDFA700B5A802 /* ToDoTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +427,7 @@
 				761572232CEB9F1300375EFC /* Ext+Date.swift in Sources */,
 				761572212CEB9A7000375EFC /* CoreDataManager.swift in Sources */,
 				7615721F2CEB997100375EFC /* ToDo.xcdatamodeld in Sources */,
+				766687502CEE028700B52001 /* NetworkService.swift in Sources */,
 				761571EE2CEB4EE600375EFC /* SceneDelegate.swift in Sources */,
 				761572AF2CEBB60E00375EFC /* DetailsInteractor.swift in Sources */,
 				761571EF2CEB4EE600375EFC /* ListViewController.swift in Sources */,
